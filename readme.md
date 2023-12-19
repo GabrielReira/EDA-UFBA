@@ -49,5 +49,29 @@ Elabore os algoritmos de modo recursivo para o percurso em pré-ordem, ordem e p
 
 Elabore os algoritmo não recursivos (iterativos) para o percurso em pré-ordem, ordem e pós-ordem de uma árvore binária. Como sugestão utilize uma ou mais pilhas.
 
-# Exercício 11 - Árvores isomorfas
+### Exercício 11 - Árvores isomorfas
 Elabore um algoritmo para verificar se duas árvores biordenadas são ou não isomorfas.
+
+### Exercício 12 - Árvore AVL
+
+Desenhe a árvore AVL resultante após cada uma das inclusões a seguir: 30, 50, 90, 10, 20, 40.
+
+### Exercício 13 - Algoritmo em Árvore AVL
+
+Apresente o algoritmo de rotação à esquerda numa árvore AVL.
+
+### Exercício 14 - Árvore balanceada
+
+Considere uma árvore Binária de Busca balanceada, similar à árvore AVL, na qual, para cada nó, a diferença da altura entre as sub-árvores esquerda e direita possa ser de até 2.  
+Elabore o algoritmo de inclusão para esta árvore, que atualize o balanceamento dos nós, e indique em que casos deve ser feito um roteamento e qual roteamento. Não é preciso apresentar os algoritmos de roteamento.
+
+### Exercício 15 - Construção de Heap
+
+Construa um Heap com a lista de prioridades a seguir (desenhe a árvore e a lista resultantes): 
+  1. Inclusão - 18, 25, 41, 34, 14, 10, 52, 50, 48;
+  2. Inclusão das prioridades 28 e 70;
+  3. Exclusão da prioridade 41.
+
+### Exercício 16 - Algoritmo em Heap
+
+Elabore o algoritmo descer para um Heap de forma iterativa.
