@@ -1,0 +1,162 @@
+classe No:
+  valor = nulo
+  esq = nulo
+  dir = nulo
+  pai = nulo
+
+classe Elemento:
+  no = nulo
+  prox = nulo
+
+funcao empilhar(no, topo):
+  novo = Elemento()
+  novo.no = no
+  novo.prox = topo
+  topo = novo
+  return topo
+
+funcao desempilhar(topo):
+  if (topo != nulo):
+    aux = topo
+    topo = topo.prox
+    return aux
+
+funcao main():
+  escolha = -1
+  while (escolha != 5):
+    print("Escolha uma das opcoes do menu abaixo.")
+    print("""
+      1 - Inclusao
+      2 - Exclusao
+      3 - Caminhamento pre-ordem
+      4 - Mostrar a arvore
+      5 - Fim
+    """)
+    escolha = input("Sua escolha: ")
+
+    if (escolha == 1):
+      chave = input("Digite o valor que voce deseja incluir na arvore: ")
+      inclusao(chave, raiz)
+    else:
+      if (escolha == 2):
+        chave = input("Digite o valor que voce deseja excluir da arvore: ")
+        exclusao(chave, raiz)
+      else:
+        if (escolha == 3):
+          print("Caminhamento pre-ordem da arvore binaria:")
+          pre_ordem(pont, raiz, topo)
+        else:
+          if (escolha == 4):
+            print("Exibindo a arvore binaria:")
+            mostrar_arvore(pont, level, raiz)
+          else:
+            if (escolha != 5):
+              print("Opcao invalida.")
+
+funcao busca(pont, chave):
+  if (pont == nulo):
+    f = 0
+    pai = nulo
+  else:
+    if (chave == pont.valor):
+      f = 1
+      pai = pont.pai
+    else:
+      if (chave < pont.valor):
+        if (pont.esq == nulo):
+          f = 2
+          pai = pont.pai
+        else:
+          pont = pont.esq
+          pont, pai, f = busca(pont, chave)
+      else:
+        if (pont.dir == nulo):
+          f = 3
+          pai = pont.pai
+        else:
+          pont = pont.dir
+          pont, pai, f = busca(pont, chave)
+  return pont, pai, f
+
+funcao inclusao(chave, raiz):
+  pont = raiz
+  pont, pai, f = busca(pont, chave)
+  if (f == 1):
+    print("Valor ja existe na arvore binaria.")
+  else:
+    novo = No()
+    novo.valor = chave
+    if (f == 0):
+      raiz = novo
+    else:    
+      if (f == 2):
+        pont.esq = novo
+        novo.pai = pont
+      else:
+        pont.dir = novo
+        novo.pai = pont
+
+funcao exclusao(chave, raiz):
+  pont, pai, f = busca(raiz, chave)
+  if (f == 0):
+    print("A arvore binaria esta vazia.")
+  else:
+    if (f == 1):
+      if (pont.esq == nulo):
+        if (pont == raiz):
+          raiz = raiz.dir
+        else:
+          if (pont == pai.esq):
+            pai.esq = pont.dir
+          else:
+            pai.dir = pont.dir
+      else:
+        if (pont.dir == nulo):
+          if (pont == raiz):
+            raiz = raiz.esq
+          else:
+            if (pont == pai.esq):
+              pai.esq = pont.esq
+            else:
+              pai.dir = pont.esq
+        else:
+          pont_aux = pont.dir
+          pai_aux = pont
+          while (pont_aux.esq != nulo):
+            pai_aux = pont_aux
+            pont_aux = pont_aux.esq
+          if (pai_aux != pont):
+            pai_aux.esq = pont_aux.dir
+            pont_aux.dir = pont.dir
+          pont_aux.esq = pont.esq
+          if (pont == raiz):
+            raiz = pont_aux
+          else:
+            if (pai.esq == pont):
+              pai.esq = pont_aux
+            else:
+              pai.dir = pont_aux
+      del(pont)
+    else:
+      print("Valor nao existe na arvore binaria.")
+
+funcao pre_ordem(pont, raiz, topo):
+  if (raiz == nulo):
+    print("A arvore binaria esta vazia.")
+  else:
+    while (topo != nulo or pont != nulo):
+      while (pont != nulo):
+        print(pont.valor)
+        empilhar(pont, topo)
+        pont = pont.esq
+      if (topo != nulo):
+        pont = desempilhar(topo).no
+        pont = pont.dir
+
+funcao mostrar_arvore(pont, level, raiz):
+  if (raiz == nulo):
+    print("A arvore binaria esta vazia.")
+  if (pont != nulo):
+    mostrar_arvore(pont.dir, level + 1, raiz)
+    print(" " * 5 * level, "--", pont.valor)
+    mostrar_arvore(pont.esq, level + 1, raiz)
